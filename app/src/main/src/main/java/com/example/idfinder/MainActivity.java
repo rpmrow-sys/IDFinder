@@ -9,16 +9,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TextView t = new TextView(this);
         try {
-            setContentView(R.layout.activity_main);
-            TextView idView = findViewById(R.id.idView);
             String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-            if (androidId == null) androidId = "পাওয়া যায়নি";
-            idView.setText(androidId);
-        } catch (Exception e) {
-            TextView t = new TextView(this);
-            t.setText("Error: " + e.toString());
-            setContentView(t);
+            t.setText("Android ID: " + androidId);
+        } catch (Throwable e) {
+            t.setText("ERROR: " + e.toString());
         }
+        t.setTextSize(20);
+        t.setPadding(30, 100, 30, 30);
+        setContentView(t);
     }
 }
